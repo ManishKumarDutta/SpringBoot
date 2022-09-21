@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.manish.model.Student;
 import com.manish.repo.StudentRepository;
-
+ 
 @Service
 public class StudentService {
 	
@@ -33,5 +33,23 @@ public class StudentService {
 
 	public Student saveStudent(Student student) {
 		return demoRepository.save(student);
+	}
+
+	public Student updateStudent(Student student) {
+		
+		Optional<Student> optional = demoRepository.findById(student.getRollNo());
+		if(optional.isEmpty()) {
+			return student;
+		}
+		return demoRepository.save(student);
+	}
+
+	public String deleteStudent(Integer rollNo) {
+		try {
+			demoRepository.deleteById(rollNo);
+		} catch (Exception ex) {
+			return "Deletion failed";
+		}
+		return "Deletion successful";
 	}
 }

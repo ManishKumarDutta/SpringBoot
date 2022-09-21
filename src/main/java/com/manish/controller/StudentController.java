@@ -1,9 +1,11 @@
 package com.manish.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,9 +26,18 @@ public class StudentController {
 		return student;
 	}
 	
-	@PostMapping(value = "/saveStudent/")
+	@PostMapping(value = "/saveStudent")
 	public Student saveStudent(@RequestBody Student student) {
-		
 		return demoService.saveStudent(student);
+	}
+	
+	@PutMapping(value = "/updateStudent")
+	public Student updateStudent(@RequestBody Student student) {
+		return demoService.updateStudent(student);
+	}
+	
+	@DeleteMapping(value = "/deleteStudent/{rollNo}")
+	public String deleteStudent(@PathVariable Integer rollNo) {
+		return demoService.deleteStudent(rollNo);
 	}
 }
